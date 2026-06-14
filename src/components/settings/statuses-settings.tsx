@@ -30,14 +30,14 @@ export function StatusesSettings({ statuses }: Props) {
   return (
     <section className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-sm font-semibold text-slate-700">Status</h2>
+        <h2 className="text-sm font-semibold text-slate-700 dark:text-slate-300">Status</h2>
         <Button size="sm" variant="outline" className="gap-1.5" onClick={() => setCreating(true)}>
           <Plus className="size-3.5" /> Novo status
         </Button>
       </div>
 
       {creating && (
-        <form action={createAction} className="flex flex-col gap-3 bg-slate-50 border border-slate-200 rounded-lg p-3">
+        <form action={createAction} className="flex flex-col gap-3 bg-slate-50 dark:bg-white/4 border border-slate-200 dark:border-white/8 rounded-lg p-3">
           <div className="grid grid-cols-2 gap-2">
             <div className="flex flex-col gap-1">
               <Label className="text-xs">Nome *</Label>
@@ -61,7 +61,7 @@ export function StatusesSettings({ statuses }: Props) {
               <Input name="position" type="number" defaultValue={statuses.length} className="h-8 text-sm" />
             </div>
           </div>
-          <label className="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
+          <label className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 cursor-pointer">
             <input type="checkbox" name="is_final" value="true" className="size-4 rounded" />
             Status final (conclui o item)
           </label>
@@ -73,7 +73,7 @@ export function StatusesSettings({ statuses }: Props) {
         </form>
       )}
 
-      <ul className="divide-y divide-slate-100">
+      <ul className="divide-y divide-slate-100 dark:divide-white/5">
         {statuses.map((s) => (
           <StatusRow
             key={s.id}
@@ -116,7 +116,7 @@ function StatusRow({ status, editing, onEdit, onCancelEdit }: {
             </Select>
             <Input name="position" type="number" defaultValue={status.position} className="h-8 text-sm" />
           </div>
-          <label className="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
+          <label className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 cursor-pointer">
             <input type="checkbox" name="is_final" value="true" defaultChecked={status.is_final} className="size-4 rounded" />
             Status final
           </label>
@@ -134,7 +134,7 @@ function StatusRow({ status, editing, onEdit, onCancelEdit }: {
     <li className="flex items-center gap-3 py-2.5 group">
       <span className="size-3 rounded-full flex-shrink-0" style={{ backgroundColor: status.color }} />
       <div className="flex-1">
-        <p className="text-sm text-slate-700">{status.name}</p>
+        <p className="text-sm text-slate-700 dark:text-slate-300">{status.name}</p>
         <p className="text-[10px] text-slate-400">{appliesLabel} · pos {status.position}{status.is_final ? ' · final' : ''}</p>
       </div>
       <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">

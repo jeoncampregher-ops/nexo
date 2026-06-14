@@ -22,7 +22,7 @@ export function RoiConfigSettings({ roiConfig }: Props) {
 
   return (
     <section className="flex flex-col gap-4">
-      <h2 className="text-sm font-semibold text-slate-700">Configuração de ROI</h2>
+      <h2 className="text-sm font-semibold text-slate-700 dark:text-slate-300">Configuração de ROI</h2>
 
       <form action={action} className="flex flex-col gap-4">
         <div className="grid grid-cols-2 gap-4">
@@ -56,11 +56,11 @@ export function RoiConfigSettings({ roiConfig }: Props) {
         </div>
 
         {example && (
-          <div className="bg-emerald-50 border border-emerald-200 rounded-lg px-4 py-3 text-sm">
-            <p className="font-medium text-emerald-800 mb-1">Exemplo: 100h de dev, economia de R$3.000/mês</p>
-            <div className="grid grid-cols-3 gap-3 text-emerald-700">
+          <div className="bg-emerald-50 dark:bg-emerald-500/8 border border-emerald-200 dark:border-emerald-500/20 rounded-lg px-4 py-3 text-sm">
+            <p className="font-medium text-emerald-800 dark:text-emerald-300 mb-1">Exemplo: 100h de dev, economia de R$3.000/mês</p>
+            <div className="grid grid-cols-3 gap-3 text-emerald-700 dark:text-emerald-400">
               <div>
-                <p className="text-xs text-emerald-500">Custo dev</p>
+                <p className="text-xs text-emerald-500 dark:text-emerald-500">Custo dev</p>
                 <p className="font-semibold">{formatCurrency(example.devCost)}</p>
               </div>
               <div>

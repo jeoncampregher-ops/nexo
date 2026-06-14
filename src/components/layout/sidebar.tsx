@@ -17,12 +17,12 @@ import {
 } from 'lucide-react'
 
 const NAV = [
-  { href: '/dashboard',  label: 'Dashboard',  icon: LayoutDashboard },
-  { href: '/projetos',   label: 'Projetos',   icon: Kanban },
-  { href: '/pedidos',    label: 'Pedidos',    icon: ClipboardList },
-  { href: '/finalizados',label: 'Finalizados',icon: CheckSquare },
-  { href: '/gantt',      label: 'Gantt',      icon: GanttChart },
-  { href: '/roi',        label: 'ROI',        icon: TrendingUp },
+  { href: '/dashboard',   label: 'Dashboard',   icon: LayoutDashboard },
+  { href: '/projetos',    label: 'Projetos',    icon: Kanban },
+  { href: '/pedidos',     label: 'Pedidos',     icon: ClipboardList },
+  { href: '/finalizados', label: 'Finalizados', icon: CheckSquare },
+  { href: '/gantt',       label: 'Gantt',       icon: GanttChart },
+  { href: '/roi',         label: 'ROI',         icon: TrendingUp },
 ]
 
 const BOTTOM_NAV = [
@@ -40,16 +40,16 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-40 w-64 flex flex-col bg-slate-950 border-r border-white/5">
+    <aside className="fixed inset-y-0 left-0 z-40 w-64 flex flex-col bg-white dark:bg-slate-950 border-r border-slate-200 dark:border-white/5">
       {/* Logo */}
-      <div className="flex flex-col justify-center px-5 h-[68px] border-b border-white/5 flex-shrink-0">
+      <div className="flex flex-col justify-center px-5 h-[68px] border-b border-slate-200 dark:border-white/5 flex-shrink-0">
         <NexoWordmark className="text-2xl" />
-        <p className="text-xs text-slate-500 mt-1">Gestão de projetos</p>
+        <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">Gestão de projetos</p>
       </div>
 
       {/* Main nav */}
       <nav className="flex-1 px-3 py-5 flex flex-col gap-0.5 overflow-y-auto">
-        <p className="text-[11px] font-semibold text-slate-600 uppercase tracking-widest px-3 mb-2.5">Menu</p>
+        <p className="text-[11px] font-semibold text-slate-400 dark:text-slate-600 uppercase tracking-widest px-3 mb-2.5">Menu</p>
         {NAV.map(({ href, label, icon: Icon }) => {
           const active = pathname === href || pathname.startsWith(`${href}/`)
           return (
@@ -59,20 +59,25 @@ export function Sidebar() {
               className={cn(
                 'group flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] font-medium transition-all duration-150',
                 active
-                  ? 'bg-indigo-500/15 text-indigo-400'
-                  : 'text-slate-400 hover:text-slate-100 hover:bg-white/5'
+                  ? 'bg-indigo-50 dark:bg-indigo-500/15 text-indigo-600 dark:text-indigo-400'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-white/5'
               )}
             >
-              <Icon className={cn('size-[18px] flex-shrink-0 transition-colors', active ? 'text-indigo-400' : 'text-slate-600 group-hover:text-slate-300')} />
+              <Icon className={cn(
+                'size-[18px] flex-shrink-0 transition-colors',
+                active
+                  ? 'text-indigo-500 dark:text-indigo-400'
+                  : 'text-slate-400 dark:text-slate-600 group-hover:text-slate-600 dark:group-hover:text-slate-300'
+              )} />
               {label}
-              {active && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-indigo-400" />}
+              {active && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-indigo-400" />}
             </Link>
           )
         })}
       </nav>
 
       {/* Bottom nav */}
-      <div className="px-3 py-4 border-t border-white/5 flex flex-col gap-0.5">
+      <div className="px-3 py-4 border-t border-slate-200 dark:border-white/5 flex flex-col gap-0.5">
         {BOTTOM_NAV.map(({ href, label, icon: Icon }) => {
           const active = pathname === href
           return (
@@ -82,11 +87,16 @@ export function Sidebar() {
               className={cn(
                 'group flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] font-medium transition-all duration-150',
                 active
-                  ? 'bg-indigo-500/15 text-indigo-400'
-                  : 'text-slate-400 hover:text-slate-100 hover:bg-white/5'
+                  ? 'bg-indigo-50 dark:bg-indigo-500/15 text-indigo-600 dark:text-indigo-400'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-white/5'
               )}
             >
-              <Icon className={cn('size-[18px] flex-shrink-0 transition-colors', active ? 'text-indigo-400' : 'text-slate-600 group-hover:text-slate-300')} />
+              <Icon className={cn(
+                'size-[18px] flex-shrink-0 transition-colors',
+                active
+                  ? 'text-indigo-500 dark:text-indigo-400'
+                  : 'text-slate-400 dark:text-slate-600 group-hover:text-slate-600 dark:group-hover:text-slate-300'
+              )} />
               {label}
             </Link>
           )
@@ -94,9 +104,9 @@ export function Sidebar() {
 
         <button
           onClick={handleLogout}
-          className="group flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] font-medium text-slate-400 hover:text-red-400 hover:bg-red-500/8 transition-all duration-150 w-full text-left mt-1"
+          className="group flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] font-medium text-slate-500 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/8 transition-all duration-150 w-full text-left mt-1"
         >
-          <LogOut className="size-[18px] flex-shrink-0 text-slate-600 group-hover:text-red-400 transition-colors" />
+          <LogOut className="size-[18px] flex-shrink-0 text-slate-400 dark:text-slate-600 group-hover:text-red-500 dark:group-hover:text-red-400 transition-colors" />
           Sair
         </button>
       </div>

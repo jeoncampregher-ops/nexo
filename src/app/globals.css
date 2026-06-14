@@ -137,9 +137,9 @@
     @apply bg-transparent;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-200 rounded-full;
+    @apply bg-slate-200 dark:bg-slate-800 rounded-full;
   }
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-slate-300;
+    @apply bg-slate-300 dark:bg-slate-700;
   }
 }

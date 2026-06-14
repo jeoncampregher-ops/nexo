@@ -1,8 +1,9 @@
 'use client'
 
 import { useMemo } from 'react'
-import { addDays, addWeeks, differenceInDays, format, isAfter, isBefore, max, min, startOfWeek } from 'date-fns'
+import { addDays, addWeeks, differenceInDays, format, isBefore, max, min, startOfWeek } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+import { useTheme } from 'next-themes'
 import { isDelayed } from '@/lib/utils'
 import type { Project } from '@/lib/types'
 
@@ -14,11 +15,19 @@ interface Props {
 }
 
 export function GanttChart({ projects }: Props) {
+  const { resolvedTheme } = useTheme()
+  const dark = resolvedTheme === 'dark'
+
   const { weeks, rows } = useMemo(() => buildGantt(projects), [projects])
+
+  const border   = dark ? 'rgba(255,255,255,0.06)' : '#f1f5f9'
+  const headerBg = dark ? '#0f172a' : '#ffffff'
+  const tickText = dark ? '#475569' : '#94a3b8'
+  const rowHover = dark ? 'dark:hover:bg-white/4' : ''
 
   if (!rows.length) {
     return (
-      <div className="flex flex-col items-center justify-center py-24 text-slate-400 gap-3">
+      <div className="flex flex-col items-center justify-center py-24 text-slate-400 dark:text-slate-500 gap-3">
         <p className="text-sm">Nenhum projeto com datas para exibir no Gantt.</p>
         <p className="text-xs">Adicione uma data de início ou entrega aos projetos.</p>
       </div>
@@ -29,18 +38,25 @@ export function GanttChart({ projects }: Props) {
     <div className="overflow-x-auto">
       <div style={{ minWidth: LABEL_COL + weeks.length * WEEK_COL }}>
         {/* Header */}
-        <div className="flex border-b border-slate-200 sticky top-0 bg-white z-10">
-          <div style={{ width: LABEL_COL, minWidth: LABEL_COL }} className="flex-shrink-0 px-3 py-2 text-xs font-medium text-slate-500 uppercase tracking-wide border-r border-slate-100">
+        <div
+          className="flex border-b sticky top-0 z-10"
+          style={{ borderColor: border, backgroundColor: headerBg }}
+        >
+          <div
+            style={{ width: LABEL_COL, minWidth: LABEL_COL, borderRightColor: border }}
+            className="flex-shrink-0 px-3 py-2 text-xs font-medium text-slate-500 dark:text-slate-500 uppercase tracking-wide border-r"
+          >
             Projeto
           </div>
           <div className="flex flex-1">
             {weeks.map((w) => (
               <div
                 key={w.toISOString()}
-                style={{ width: WEEK_COL, minWidth: WEEK_COL }}
-                className="px-1 py-2 text-[10px] text-slate-400 text-center border-r border-slate-100 font-medium"
+                style={{ width: WEEK_COL, minWidth: WEEK_COL, borderRightColor: border }}
+                className="px-1 py-2 text-[10px] text-center border-r font-medium"
+                data-color={tickText}
               >
-                {format(w, 'dd/MM', { locale: ptBR })}
+                <span style={{ color: tickText }}>{format(w, 'dd/MM', { locale: ptBR })}</span>
               </div>
             ))}
           </div>
@@ -50,12 +66,23 @@ export function GanttChart({ projects }: Props) {
         {rows.map(({ project, startCol, endCol }) => {
           const delayed = isDelayed(project.expected_date, project.completed_at)
           const color = project.sector?.color ?? '#6366f1'
+          const barBg = delayed
+            ? (dark ? 'rgba(239,68,68,0.15)' : '#fef2f2')
+            : `${color}22`
+          const barBorder = delayed ? '#f87171' : color
 
           return (
-            <div key={project.id} className="flex items-center border-b border-slate-100 hover:bg-slate-50 transition-colors" style={{ height: 48 }}>
+            <div
+              key={project.id}
+              className="flex items-center border-b hover:bg-slate-50 dark:hover:bg-white/3 transition-colors"
+              style={{ height: 48, borderColor: border }}
+            >
               {/* Label */}
-              <div style={{ width: LABEL_COL, minWidth: LABEL_COL }} className="flex-shrink-0 px-3 border-r border-slate-100">
-                <p className="text-sm font-medium text-slate-800 line-clamp-1">{project.title}</p>
+              <div
+                style={{ width: LABEL_COL, minWidth: LABEL_COL, borderRightColor: border }}
+                className="flex-shrink-0 px-3 border-r"
+              >
+                <p className="text-sm font-medium text-slate-800 dark:text-slate-200 line-clamp-1">{project.title}</p>
                 {project.sector && (
                   <span
                     className="text-[9px] font-medium px-1 py-0.5 rounded"
@@ -71,8 +98,8 @@ export function GanttChart({ projects }: Props) {
                 {weeks.map((w) => (
                   <div
                     key={w.toISOString()}
-                    style={{ width: WEEK_COL, minWidth: WEEK_COL }}
-                    className="border-r border-slate-100 h-full"
+                    style={{ width: WEEK_COL, minWidth: WEEK_COL, borderRightColor: border }}
+                    className="border-r h-full"
                   />
                 ))}
 
@@ -84,13 +111,13 @@ export function GanttChart({ projects }: Props) {
                       left: startCol * WEEK_COL,
                       width: (endCol - startCol) * WEEK_COL - 4,
                       height: 28,
-                      backgroundColor: delayed ? '#fef2f2' : `${color}22`,
-                      border: `1.5px solid ${delayed ? '#f87171' : color}`,
+                      backgroundColor: barBg,
+                      border: `1.5px solid ${barBorder}`,
                     }}
                   >
                     <span
                       className="text-[10px] font-medium truncate"
-                      style={{ color: delayed ? '#ef4444' : color }}
+                      style={{ color: delayed ? '#f87171' : color }}
                     >
                       {delayed && '⚠ '}
                       {project.title}
@@ -104,13 +131,13 @@ export function GanttChart({ projects }: Props) {
       </div>
 
       {/* Legend */}
-      <div className="flex items-center gap-6 mt-4 pt-4 border-t border-slate-100 text-xs text-slate-500">
+      <div className="flex items-center gap-6 mt-4 pt-4 border-t border-slate-100 dark:border-white/8 text-xs text-slate-500 dark:text-slate-400">
         <div className="flex items-center gap-1.5">
-          <div className="w-4 h-3 rounded-sm bg-indigo-100 border border-indigo-400" />
+          <div className="w-4 h-3 rounded-sm bg-indigo-100 dark:bg-indigo-500/20 border border-indigo-400" />
           Em andamento
         </div>
         <div className="flex items-center gap-1.5">
-          <div className="w-4 h-3 rounded-sm bg-red-50 border border-red-400" />
+          <div className="w-4 h-3 rounded-sm bg-red-50 dark:bg-red-500/15 border border-red-400" />
           Atrasado
         </div>
       </div>

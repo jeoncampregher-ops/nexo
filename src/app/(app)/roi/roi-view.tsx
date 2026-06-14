@@ -21,10 +21,10 @@ const BENEFIT_LABELS: Record<BenefitType, string> = {
 }
 
 const BENEFIT_COLORS: Record<BenefitType, string> = {
-  cost_reduction:   'bg-blue-50 text-blue-700 ring-blue-200',
-  revenue_increase: 'bg-emerald-50 text-emerald-700 ring-emerald-200',
-  compliance:       'bg-amber-50 text-amber-700 ring-amber-200',
-  quality:          'bg-purple-50 text-purple-700 ring-purple-200',
+  cost_reduction:   'bg-blue-50 dark:bg-blue-500/15 text-blue-700 dark:text-blue-300 ring-blue-200 dark:ring-blue-500/30',
+  revenue_increase: 'bg-emerald-50 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 ring-emerald-200 dark:ring-emerald-500/30',
+  compliance:       'bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-300 ring-amber-200 dark:ring-amber-500/30',
+  quality:          'bg-purple-50 dark:bg-purple-500/15 text-purple-700 dark:text-purple-300 ring-purple-200 dark:ring-purple-500/30',
 }
 
 function SummaryCard({ label, value, sub, accent }: {
@@ -34,10 +34,10 @@ function SummaryCard({ label, value, sub, accent }: {
     green:   'text-emerald-600',
     red:     'text-red-500',
     blue:    'text-indigo-600',
-    default: 'text-slate-800',
+    default: 'text-slate-800 dark:text-slate-100',
   }
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm px-5 py-4 flex flex-col gap-1">
+    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-white/6 px-5 py-4 flex flex-col gap-1">
       <p className="text-[10.5px] font-bold uppercase tracking-widest text-slate-400">{label}</p>
       <p className={cn('text-2xl font-bold leading-none', colors[accent ?? 'default'])}>{value}</p>
       {sub && <p className="text-[11px] text-slate-400">{sub}</p>}
@@ -115,21 +115,21 @@ export function RoiView({ projects, roiConfig }: Props) {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-white/6 overflow-hidden">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-slate-50/80 border-b border-slate-100">
-              <th className="px-4 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-wide">Projeto</th>
-              <th className="px-4 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-wide">Status</th>
-              <th className="px-4 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-wide text-right">Custo dev</th>
-              <th className="px-4 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-wide text-right">Economia/mês</th>
-              <th className="px-4 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-wide text-right">Economia/ano</th>
-              <th className="px-4 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-wide text-right">ROI %</th>
-              <th className="px-4 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-wide text-right">Payback</th>
-              <th className="px-4 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-wide">Benefício</th>
+            <tr className="bg-slate-50/80 dark:bg-white/4 border-b border-slate-100 dark:border-white/8">
+              <th className="px-4 py-3 text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Projeto</th>
+              <th className="px-4 py-3 text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Status</th>
+              <th className="px-4 py-3 text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide text-right">Custo dev</th>
+              <th className="px-4 py-3 text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide text-right">Economia/mês</th>
+              <th className="px-4 py-3 text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide text-right">Economia/ano</th>
+              <th className="px-4 py-3 text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide text-right">ROI %</th>
+              <th className="px-4 py-3 text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide text-right">Payback</th>
+              <th className="px-4 py-3 text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Benefício</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-50">
+          <tbody className="divide-y divide-slate-100 dark:divide-white/5">
             {rows.length === 0 ? (
               <tr>
                 <td colSpan={8} className="px-4 py-12 text-center text-sm text-slate-400">
@@ -137,10 +137,10 @@ export function RoiView({ projects, roiConfig }: Props) {
                 </td>
               </tr>
             ) : rows.map(({ project, roi, missing }) => (
-              <tr key={project.id} className="hover:bg-slate-50/60 transition-colors">
+              <tr key={project.id} className="hover:bg-slate-50/60 dark:hover:bg-white/3 transition-colors">
                 {/* Projeto */}
                 <td className="px-4 py-3">
-                  <p className="text-[13px] font-medium text-slate-800 max-w-[200px] truncate">{project.title}</p>
+                  <p className="text-[13px] font-medium text-slate-800 dark:text-slate-200 max-w-[200px] truncate">{project.title}</p>
                   {project.sector && (
                     <span className="text-[10px] font-medium" style={{ color: project.sector.color }}>
                       {project.sector.name}
@@ -168,7 +168,7 @@ export function RoiView({ projects, roiConfig }: Props) {
                 {/* Custo dev */}
                 <td className="px-4 py-3 text-right">
                   {roi ? (
-                    <span className="text-[13px] font-medium text-slate-700">{formatCurrency(roi.devCost)}</span>
+                    <span className="text-[13px] font-medium text-slate-700 dark:text-slate-300">{formatCurrency(roi.devCost)}</span>
                   ) : missing === 'horas' ? (
                     <span className="text-[11px] text-amber-500 flex items-center justify-end gap-1">
                       <AlertCircle className="size-3" /> sem horas
@@ -212,7 +212,7 @@ export function RoiView({ projects, roiConfig }: Props) {
                 {/* Payback */}
                 <td className="px-4 py-3 text-right">
                   {roi?.paybackMonths != null ? (
-                    <span className="text-[13px] font-medium text-slate-700">
+                    <span className="text-[13px] font-medium text-slate-700 dark:text-slate-300">
                       {roi.paybackMonths} meses
                     </span>
                   ) : <span className="text-slate-300">—</span>}

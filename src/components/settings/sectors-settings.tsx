@@ -23,14 +23,14 @@ export function SectorsSettings({ sectors }: Props) {
   return (
     <section className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-sm font-semibold text-slate-700">Setores</h2>
+        <h2 className="text-sm font-semibold text-slate-700 dark:text-slate-300">Setores</h2>
         <Button size="sm" variant="outline" className="gap-1.5" onClick={() => setCreating(true)}>
           <Plus className="size-3.5" /> Novo setor
         </Button>
       </div>
 
       {creating && (
-        <form action={createAction} className="flex items-end gap-2 bg-slate-50 border border-slate-200 rounded-lg p-3">
+        <form action={createAction} className="flex items-end gap-2 bg-slate-50 dark:bg-white/4 border border-slate-200 dark:border-white/8 rounded-lg p-3">
           <div className="flex flex-col gap-1 flex-1">
             <Label className="text-xs">Nome</Label>
             <Input name="name" placeholder="Ex: Financeiro" autoFocus required className="h-8 text-sm" />
@@ -45,7 +45,7 @@ export function SectorsSettings({ sectors }: Props) {
         </form>
       )}
 
-      <ul className="divide-y divide-slate-100">
+      <ul className="divide-y divide-slate-100 dark:divide-white/5">
         {sectors.map((s) => (
           <SectorRow
             key={s.id}
@@ -90,7 +90,7 @@ function SectorRow({ sector, editing, onEdit, onCancelEdit }: {
   return (
     <li className="flex items-center gap-3 py-2.5 group">
       <span className="size-3 rounded-full flex-shrink-0" style={{ backgroundColor: sector.color }} />
-      <span className="text-sm text-slate-700 flex-1">{sector.name}</span>
+      <span className="text-sm text-slate-700 dark:text-slate-300 flex-1">{sector.name}</span>
       <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
         <Button size="sm" variant="ghost" className="size-7 p-0" onClick={onEdit}><Pencil className="size-3" /></Button>
         <form action={deleteAction}>

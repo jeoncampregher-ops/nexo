@@ -19,8 +19,8 @@ const ROLES: { value: Role; label: string }[] = [
 export function UsersSettings({ profiles, currentUserId }: Props) {
   return (
     <section className="flex flex-col gap-4">
-      <h2 className="text-sm font-semibold text-slate-700">Usuários</h2>
-      <ul className="divide-y divide-slate-100">
+      <h2 className="text-sm font-semibold text-slate-700 dark:text-slate-300">Usuários</h2>
+      <ul className="divide-y divide-slate-100 dark:divide-white/5">
         {profiles.map((p) => (
           <UserRow key={p.id} profile={p} isSelf={p.id === currentUserId} />
         ))}
@@ -37,7 +37,7 @@ function UserRow({ profile, isSelf }: { profile: Profile; isSelf: boolean }) {
     <li className="flex items-center gap-3 py-3">
       <UserAvatar user={profile} size="md" />
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium text-slate-800 truncate">
+        <p className="text-sm font-medium text-slate-800 dark:text-slate-200 truncate">
           {profile.full_name}
           {isSelf && <span className="ml-1.5 text-[10px] text-slate-400">(você)</span>}
         </p>

@@ -18,7 +18,7 @@ export function ProjectCard({ project, isDragging }: Props) {
     <KanbanCard id={project.id}>
       <div className="flex flex-col gap-2.5">
         <div className="flex items-start justify-between gap-2">
-          <p className="text-sm font-medium text-slate-800 leading-snug line-clamp-2">{project.title}</p>
+          <p className="text-sm font-medium text-slate-800 dark:text-slate-200 leading-snug line-clamp-2">{project.title}</p>
           {delayed && <AlertTriangle className="size-3.5 text-red-400 flex-shrink-0 mt-0.5" />}
         </div>
 
@@ -36,7 +36,7 @@ export function ProjectCard({ project, isDragging }: Props) {
           {project.status && <StatusBadge status={project.status} size="sm" />}
         </div>
 
-        <div className="flex items-center justify-between pt-1 border-t border-slate-100">
+        <div className="flex items-center justify-between pt-1 border-t border-slate-100 dark:border-white/8">
           <div className="flex items-center gap-1 text-[10px] text-slate-400">
             <Calendar className="size-3" />
             {project.expected_date ? (

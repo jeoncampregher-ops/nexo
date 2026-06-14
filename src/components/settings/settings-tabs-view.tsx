@@ -42,7 +42,7 @@ export function SettingsTabsView({ sectors, teams, statuses, priorities, roiConf
   return (
     <div className="flex flex-col flex-1 min-h-0">
       {/* Tab navigation */}
-      <div className="bg-white border-b border-slate-200 px-6 shrink-0">
+      <div className="bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-white/5 px-6 shrink-0">
         <nav className="flex gap-0 -mb-px overflow-x-auto">
           {TABS.map((tab) => {
             const Icon = tab.icon
@@ -54,8 +54,8 @@ export function SettingsTabsView({ sectors, teams, statuses, priorities, roiConf
                 className={cn(
                   'flex items-center gap-2 px-4 py-3.5 border-b-2 text-[11px] font-bold uppercase tracking-widest whitespace-nowrap transition-all',
                   isActive
-                    ? 'border-indigo-500 text-indigo-600'
-                    : 'border-transparent text-slate-400 hover:text-slate-600 hover:border-slate-200'
+                    ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400'
+                    : 'border-transparent text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:border-slate-200 dark:hover:border-slate-700'
                 )}
               >
                 <Icon className="size-3.5" />
@@ -67,21 +67,21 @@ export function SettingsTabsView({ sectors, teams, statuses, priorities, roiConf
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto p-6 bg-slate-50/60">
+      <div className="flex-1 overflow-y-auto p-6 bg-slate-50/60 dark:bg-transparent">
         <div className={cn('mx-auto flex flex-col gap-4', active === 'permissoes' ? 'max-w-3xl' : 'max-w-2xl')}>
           {/* Section header */}
           <div className="flex items-center gap-3">
-            <div className="size-8 rounded-lg bg-indigo-50 ring-1 ring-indigo-100 flex items-center justify-center">
-              <currentTab.icon className="size-4 text-indigo-500" />
+            <div className="size-8 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 ring-1 ring-indigo-100 dark:ring-indigo-500/20 flex items-center justify-center">
+              <currentTab.icon className="size-4 text-indigo-500 dark:text-indigo-400" />
             </div>
             <div>
-              <h2 className="text-sm font-semibold text-slate-900">{currentTab.label}</h2>
-              <p className="text-[11px] text-slate-400">{currentTab.desc}</p>
+              <h2 className="text-sm font-semibold text-slate-900 dark:text-white">{currentTab.label}</h2>
+              <p className="text-[11px] text-slate-400 dark:text-slate-500">{currentTab.desc}</p>
             </div>
           </div>
 
           {/* Panel */}
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-white/6 shadow-sm overflow-hidden">
             <div className="p-6">
               {active === 'setores'     && <SectorsSettings sectors={sectors} />}
               {active === 'times'       && <TeamsSettings teams={teams} />}

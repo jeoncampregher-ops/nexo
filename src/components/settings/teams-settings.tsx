@@ -23,14 +23,14 @@ export function TeamsSettings({ teams }: Props) {
   return (
     <section className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-sm font-semibold text-slate-700">Times</h2>
+        <h2 className="text-sm font-semibold text-slate-700 dark:text-slate-300">Times</h2>
         <Button size="sm" variant="outline" className="gap-1.5" onClick={() => setCreating(true)}>
           <Plus className="size-3.5" /> Novo time
         </Button>
       </div>
 
       {creating && (
-        <form action={createAction} className="flex flex-col gap-2 bg-slate-50 border border-slate-200 rounded-lg p-3">
+        <form action={createAction} className="flex flex-col gap-2 bg-slate-50 dark:bg-white/4 border border-slate-200 dark:border-white/8 rounded-lg p-3">
           <div className="flex gap-2">
             <div className="flex flex-col gap-1 flex-1">
               <Label className="text-xs">Nome *</Label>
@@ -49,7 +49,7 @@ export function TeamsSettings({ teams }: Props) {
         </form>
       )}
 
-      <ul className="divide-y divide-slate-100">
+      <ul className="divide-y divide-slate-100 dark:divide-white/5">
         {teams.map((t) => (
           <TeamRow
             key={t.id}
@@ -94,7 +94,7 @@ function TeamRow({ team, editing, onEdit, onCancelEdit }: {
   return (
     <li className="flex items-center gap-3 py-2.5 group">
       <div className="flex-1">
-        <p className="text-sm text-slate-700">{team.name}</p>
+        <p className="text-sm text-slate-700 dark:text-slate-300">{team.name}</p>
         {team.description && <p className="text-xs text-slate-400">{team.description}</p>}
       </div>
       <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">

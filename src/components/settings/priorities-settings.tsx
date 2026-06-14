@@ -25,14 +25,14 @@ export function PrioritiesSettings({ priorities }: Props) {
   return (
     <section className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-sm font-semibold text-slate-700">Prioridades</h2>
+        <h2 className="text-sm font-semibold text-slate-700 dark:text-slate-300">Prioridades</h2>
         <Button size="sm" variant="outline" className="gap-1.5" onClick={() => setCreating(true)}>
           <Plus className="size-3.5" /> Nova prioridade
         </Button>
       </div>
 
       {creating && (
-        <form action={createAction} className="flex flex-col gap-3 bg-slate-50 border border-slate-200 rounded-lg p-3">
+        <form action={createAction} className="flex flex-col gap-3 bg-slate-50 dark:bg-white/4 border border-slate-200 dark:border-white/8 rounded-lg p-3">
           <div className="grid grid-cols-2 gap-2">
             <div className="flex flex-col gap-1">
               <Label className="text-xs">Nome *</Label>
@@ -61,7 +61,7 @@ export function PrioritiesSettings({ priorities }: Props) {
         </form>
       )}
 
-      <ul className="divide-y divide-slate-100">
+      <ul className="divide-y divide-slate-100 dark:divide-white/5">
         {priorities.map((p) => (
           <PriorityRow
             key={p.id}
@@ -115,7 +115,7 @@ function PriorityRow({ priority, editing, onEdit, onCancelEdit }: {
         {LEVEL_ICON[priority.level] ?? '·'}
       </span>
       <div className="flex-1">
-        <p className="text-sm text-slate-700">{priority.name}</p>
+        <p className="text-sm text-slate-700 dark:text-slate-300">{priority.name}</p>
         <p className="text-[10px] text-slate-400">
           Nível {priority.level}{priority.sla_days ? ` · SLA ${priority.sla_days}d` : ''}
         </p>

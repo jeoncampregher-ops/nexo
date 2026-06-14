@@ -118,16 +118,16 @@ export function ProjectsView({ projects, statuses, sectors, teams, priorities, p
         {/* Toolbar */}
         <div className="flex items-center gap-2 flex-wrap">
           {/* View toggle */}
-          <div className="flex items-center gap-0.5 p-0.5 bg-slate-100 rounded-lg">
+          <div className="flex items-center gap-0.5 p-0.5 bg-slate-100 dark:bg-slate-800 rounded-lg">
             <button
               onClick={() => setView('list')}
-              className={cn('flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all', view === 'list' ? 'bg-white shadow-sm text-slate-900' : 'text-slate-500 hover:text-slate-700')}
+              className={cn('flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all', view === 'list' ? 'bg-white dark:bg-slate-700 shadow-sm text-slate-900 dark:text-white' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200')}
             >
               <List className="size-3.5" /> Lista
             </button>
             <button
               onClick={() => setView('kanban')}
-              className={cn('flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all', view === 'kanban' ? 'bg-white shadow-sm text-slate-900' : 'text-slate-500 hover:text-slate-700')}
+              className={cn('flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all', view === 'kanban' ? 'bg-white dark:bg-slate-700 shadow-sm text-slate-900 dark:text-white' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200')}
             >
               <Kanban className="size-3.5" /> Kanban
             </button>
@@ -183,7 +183,7 @@ export function ProjectsView({ projects, statuses, sectors, teams, priorities, p
           </Select>
 
           {hasFilters && (
-            <button onClick={resetFilters} className="text-xs text-slate-400 hover:text-slate-600 transition-colors">
+            <button onClick={resetFilters} className="text-xs text-slate-400 dark:text-slate-500 hover:text-slate-600 transition-colors">
               Limpar
             </button>
           )}
@@ -202,14 +202,14 @@ export function ProjectsView({ projects, statuses, sectors, teams, priorities, p
         {/* List view */}
         {view === 'list' && (
           <div className="flex flex-col gap-0 flex-1">
-            <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-white/6 overflow-hidden">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-100 bg-slate-50/60">
+                  <tr className="border-b border-slate-100 dark:border-white/8 bg-slate-50/60 dark:bg-white/4">
                     {COLS.map(({ key, label }) => (
                       <th
                         key={label}
-                        className={cn('px-4 py-3 text-[11px] font-semibold text-slate-500 uppercase tracking-wide whitespace-nowrap', key && 'cursor-pointer select-none hover:text-slate-700')}
+                        className={cn('px-4 py-3 text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide whitespace-nowrap', key && 'cursor-pointer select-none hover:text-slate-700')}
                         onClick={() => key && handleSort(key)}
                       >
                         <span className="flex items-center gap-0.5">
@@ -220,7 +220,7 @@ export function ProjectsView({ projects, statuses, sectors, teams, priorities, p
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50">
+                <tbody className="divide-y divide-slate-100 dark:divide-white/5">
                   {paginated.length === 0 ? (
                     <tr>
                       <td colSpan={7} className="px-4 py-12 text-center text-sm text-slate-400">
@@ -237,7 +237,7 @@ export function ProjectsView({ projects, statuses, sectors, teams, priorities, p
             {/* Pagination */}
             {filtered.length > 0 && (
               <div className="flex items-center justify-between mt-3 px-1">
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-slate-400 dark:text-slate-500">
                   {filtered.length === 0 ? '0' : `${(page - 1) * PAGE_SIZE + 1}–${Math.min(page * PAGE_SIZE, filtered.length)}`} de{' '}
                   <strong className="text-slate-600">{filtered.length}</strong> projeto{filtered.length !== 1 ? 's' : ''}
                 </p>
@@ -245,7 +245,7 @@ export function ProjectsView({ projects, statuses, sectors, teams, priorities, p
                   <button
                     disabled={page === 1}
                     onClick={() => setPage((p) => p - 1)}
-                    className="size-7 flex items-center justify-center rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                    className="size-7 flex items-center justify-center rounded-lg border border-slate-200 dark:border-white/8 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-white/5 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                   >
                     <ChevronLeft className="size-3.5" />
                   </button>
@@ -258,12 +258,12 @@ export function ProjectsView({ projects, statuses, sectors, teams, priorities, p
                     }, [])
                     .map((n, i) =>
                       n === '...' ? (
-                        <span key={`e${i}`} className="px-1 text-xs text-slate-400">…</span>
+                        <span key={`e${i}`} className="px-1 text-xs text-slate-400 dark:text-slate-500">…</span>
                       ) : (
                         <button
                           key={n}
                           onClick={() => setPage(n as number)}
-                          className={cn('size-7 text-xs rounded-lg border transition-colors', page === n ? 'border-indigo-500 bg-indigo-50 text-indigo-600 font-semibold' : 'border-slate-200 text-slate-500 hover:bg-slate-50')}
+                          className={cn('size-7 text-xs rounded-lg border transition-colors', page === n ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 font-semibold' : 'border-slate-200 dark:border-white/8 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-white/5')}
                         >
                           {n}
                         </button>
@@ -272,7 +272,7 @@ export function ProjectsView({ projects, statuses, sectors, teams, priorities, p
                   <button
                     disabled={page === totalPages}
                     onClick={() => setPage((p) => p + 1)}
-                    className="size-7 flex items-center justify-center rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                    className="size-7 flex items-center justify-center rounded-lg border border-slate-200 dark:border-white/8 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-white/5 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                   >
                     <ChevronRight className="size-3.5" />
                   </button>

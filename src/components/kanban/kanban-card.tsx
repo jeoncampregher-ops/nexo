@@ -20,8 +20,8 @@ export function KanbanCard({ id, children, className }: Props) {
       {...attributes}
       {...listeners}
       className={cn(
-        'bg-white rounded-lg border border-slate-200 p-3.5 cursor-grab active:cursor-grabbing',
-        'shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-150',
+        'bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-white/8 p-3.5 cursor-grab active:cursor-grabbing',
+        'shadow-sm hover:shadow-md hover:border-slate-300 dark:hover:border-white/15 transition-all duration-150',
         isDragging && 'opacity-40 shadow-xl rotate-1 scale-105',
         className
       )}

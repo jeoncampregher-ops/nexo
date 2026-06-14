@@ -31,7 +31,7 @@ async function FinalizadosContent() {
     <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-slate-200 text-left text-xs text-slate-500 uppercase tracking-wide">
+          <tr className="border-b border-slate-200 dark:border-white/8 text-left text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wide">
             <th className="pb-3 pr-4 font-medium">Projeto</th>
             <th className="pb-3 pr-4 font-medium">Setor</th>
             <th className="pb-3 pr-4 font-medium">Status</th>
@@ -41,13 +41,13 @@ async function FinalizadosContent() {
             <th className="pb-3 font-medium">Concluído em</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-slate-100">
+        <tbody className="divide-y divide-slate-100 dark:divide-white/5">
           {finished.map((project) => {
             const lt = leadTimeDays(project.created_at, project.completed_at)
             return (
-              <tr key={project.id} className="hover:bg-slate-50 transition-colors">
+              <tr key={project.id} className="hover:bg-slate-50 dark:hover:bg-white/4 transition-colors">
                 <td className="py-3 pr-4">
-                  <p className="font-medium text-slate-800 line-clamp-1">{project.title}</p>
+                  <p className="font-medium text-slate-800 dark:text-slate-200 line-clamp-1">{project.title}</p>
                   {project.description && (
                     <p className="text-xs text-slate-400 line-clamp-1 mt-0.5">{project.description}</p>
                   )}
@@ -93,7 +93,7 @@ async function FinalizadosContent() {
         </tbody>
       </table>
 
-      <div className="mt-6 flex items-center gap-6 text-sm text-slate-500 border-t border-slate-100 pt-4">
+      <div className="mt-6 flex items-center gap-6 text-sm text-slate-500 border-t border-slate-100 dark:border-white/8 pt-4">
         <span>{finished.length} projeto{finished.length !== 1 ? 's' : ''} finalizado{finished.length !== 1 ? 's' : ''}</span>
         {finished.length > 0 && (() => {
           const withLt = finished.map((p) => leadTimeDays(p.created_at, p.completed_at)).filter((d): d is number => d != null)
@@ -111,7 +111,7 @@ export default function FinalizadosPage() {
     <>
       <Header title="Finalizados" />
       <div className="flex-1 overflow-y-auto p-6">
-        <div className="bg-white rounded-xl border border-slate-200 p-6">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-white/6 p-6">
           <Suspense fallback={<Skeleton className="h-64 rounded-xl" />}>
             <FinalizadosContent />
           </Suspense>

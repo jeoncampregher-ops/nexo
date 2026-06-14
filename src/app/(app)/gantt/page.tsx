@@ -14,7 +14,7 @@ export default function GanttPage() {
     <>
       <Header title="Gantt" />
       <div className="flex-1 overflow-auto p-6">
-        <div className="bg-white rounded-xl border border-slate-200 p-6">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-white/6 p-6">
           <Suspense fallback={<Skeleton className="h-64 rounded-xl" />}>
             <GanttContent />
           </Suspense>
