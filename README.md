@@ -5,6 +5,12 @@ Nexo é um SaaS de gestão de pipeline de desenvolvimento construído como proje
 > **Demo:** [nexo.vercel.app](https://nexo.vercel.app) — use as credenciais abaixo para explorar  
 > `gestor@demo.com` / `demo1234` · `solicitante@demo.com` / `demo1234`
 
+## Screenshots
+
+| Login | Produto |
+|---|---|
+| ![Login](public/screenshots/login.png) | ![Produto](public/screenshots/dashboard.png) |
+
 ---
 
 ## O problema que resolve
